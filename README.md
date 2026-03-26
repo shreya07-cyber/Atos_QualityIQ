@@ -45,11 +45,11 @@ QualityIQ introduces an AI-driven system that:
 
 ## 🏗️ System Architecture
 
-![System Flow](images/arch1.png)
+![System Flow](images/Systemflow.png)
 
-![AI Decision Flow](images/arch2.png)
+![AI Decision Flow](images/AI_decision_making_process_flow.png)
 
-![Post Test Flow](images/arch3.png)
+![Post Test Flow](images/post_test_flow.png)
 ```
 
 ---
