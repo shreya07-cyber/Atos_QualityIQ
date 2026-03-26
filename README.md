@@ -50,7 +50,7 @@ QualityIQ introduces an AI-driven system that:
 <br>
 
 ![Post Test Flow](https://raw.githubusercontent.com/shreya07-cyber/Atos_QualityIQ/main/images/post_test_flow.png)
-```
+
 
 ---
 
