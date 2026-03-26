@@ -45,7 +45,7 @@ QualityIQ introduces an AI-driven system that:
 
 ## 🏗️ System Architecture
 
-![System Flow](images/Systemflow.png)
+![System Flow](https://github.com/shreya07-cyber/Atos_QualityIQ/blob/main/images/Systemflow.png)
 
 ![AI Decision Flow](images/AI_decision_making_process_flow.png)
 
