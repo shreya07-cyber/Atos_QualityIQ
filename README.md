@@ -1,6 +1,3 @@
-Here’s your **final ready-to-paste README.md** (clean, structured, and submission-ready for GitHub). You can copy this directly 👇
-
----
 
 # 🚀 QualityIQ — AI-Driven Testing Platform
 
