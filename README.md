@@ -2,7 +2,6 @@ Here’s your **final ready-to-paste README.md** (clean, structured, and submiss
 
 ---
 
-```md
 # 🚀 QualityIQ — AI-Driven Testing Platform
 
 QualityIQ is an **Autonomous AI Testing Agent Platform** that transforms software testing from reactive validation to **predictive, risk-driven quality engineering**.
