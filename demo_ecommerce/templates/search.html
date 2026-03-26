@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Search — ShopEasy{% endblock %}
+
+{% block content %}
+<div class="page">
+
+  <h1>Search Products</h1>
+  <p class="page-subtitle">Find exactly what you're looking for.</p>
+
+  <form method="get" action="/search" class="search-bar-row">
+    <input id="search-box" name="q" type="text" placeholder="e.g. Laptop, Phone, Shoes…" value="{{ query or '' }}">
+    <button id="search-btn" type="submit" class="btn btn-primary" style="width:auto;">Search</button>
+  </form>
+
+  {% if query is not none %}
+    {% if error_msg %}
+      <div class="flash flash-error">❌ {{ error_msg }}</div>
+    {% endif %}
+
+    {% if results %}
+      <p class="search-results-meta" id="search-results-meta">
+        {{ results|length }} result{% if results|length != 1 %}s{% endif %} for "<strong>{{ query }}</strong>"
+      </p>
+      <div class="products-grid" id="search-results">
+        {% for product in results %}
+        <a class="product-card" href="/product/{{ product.id }}" id="result-{{ product.id }}">
+          <div class="product-img">{{ product.emoji }}</div>
+          <div class="product-body">
+            <div class="product-name">{{ product.name }}</div>
+            <div class="product-category">{{ product.category }}</div>
+            <div class="product-price">${{ "%.2f"|format(product.price) }}</div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="no-results" id="no-results">
+        <div class="no-results-icon">🔍</div>
+        <h2>No results found</h2>
+        <p>We couldn't find anything for "<strong>{{ query }}</strong>".<br>Try a different search term.</p>
+      </div>
+    {% endif %}
+  {% else %}
+    <div class="no-results">
+      <div class="no-results-icon">🛍️</div>
+      <p>Enter a keyword above to search products.</p>
+    </div>
+  {% endif %}
+
+</div>
+{% endblock %}

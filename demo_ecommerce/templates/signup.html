@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Sign Up — ShopEasy{% endblock %}
+
+{% block content %}
+<div class="page-narrow">
+  <div class="card">
+    <div class="auth-header">
+      <div style="font-size:2.5rem;margin-bottom:0.75rem;">✨</div>
+      <h1>Create account</h1>
+      <p class="page-subtitle" style="margin-bottom:0;">Start shopping today</p>
+    </div>
+
+    {% if error %}
+      <div class="flash flash-error">❌ {{ error }}</div>
+    {% endif %}
+
+    {% if success %}
+      <div class="flash flash-success">✅ {{ success }}</div>
+    {% endif %}
+
+    <form method="post" action="/signup">
+      <div class="form-group">
+        <label for="name">Full name</label>
+        <input id="name" name="name" type="text" placeholder="Jane Smith">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" placeholder="jane@example.com">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" placeholder="Minimum 6 characters">
+      </div>
+
+      <div class="form-group">
+        <label for="confirm-password">Confirm password</label>
+        <input id="confirm-password" name="confirm_password" type="password" placeholder="Repeat your password">
+      </div>
+
+      <button id="signup-btn" type="submit" class="btn btn-primary">Create Account</button>
+    </form>
+
+    <div class="auth-divider">
+      Already have an account? <a href="/login">Sign in</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

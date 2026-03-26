@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Login — ShopEasy{% endblock %}
+
+{% block content %}
+<div class="page-narrow">
+  <div class="card">
+    <div class="auth-header">
+      <div style="font-size:2.5rem;margin-bottom:0.75rem;">🔐</div>
+      <h1>Welcome back</h1>
+      <p class="page-subtitle" style="margin-bottom:0;">Sign in to your account</p>
+    </div>
+
+    {% if error %}
+      <div class="flash flash-error">❌ {{ error }}</div>
+    {% endif %}
+
+    {% if success %}
+      <div class="flash flash-success">✅ {{ success }}</div>
+    {% endif %}
+
+    <form method="post" action="/login">
+      <div class="form-group">
+        <label for="username">Email address</label>
+        <input id="username" name="username" type="email" placeholder="user@test.com" autocomplete="email">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password">
+      </div>
+
+      <button id="login-btn" type="submit" class="btn btn-primary">Sign In</button>
+    </form>
+
+    <div class="auth-divider">
+      Don't have an account? <a href="/signup">Sign up</a>
+    </div>
+
+    <div style="margin-top:1.25rem;padding:0.75rem;background:var(--accent-light);border-radius:var(--radius-sm);font-size:0.82rem;color:var(--accent);">
+      🧪 <strong>Test credentials:</strong> user@test.com / 1234
+    </div>
+  </div>
+</div>
+{% endblock %}

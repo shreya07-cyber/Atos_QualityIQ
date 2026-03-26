@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}ShopEasy{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand">Shop<span>Easy</span></a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/search">Search</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li>
+      <a href="/cart" class="nav-cart" id="cart-icon">
+        🛒
+        {% if session.get('cart') %}
+          <span class="cart-badge">{{ session['cart']|length }}</span>
+        {% endif %}
+      </a>
+    </li>
+    {% if session.get('user') %}
+      <li><a href="/logout" class="btn-nav">Logout</a></li>
+    {% else %}
+      <li><a href="/login" class="btn-nav">Login</a></li>
+    {% endif %}
+  </ul>
+</nav>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div style="max-width:1100px;margin:1rem auto;padding:0 1.5rem;">
+      {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">
+          {% if category == 'success' %}✅{% elif category == 'error' %}❌{% else %}ℹ️{% endif %}
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Cart — ShopEasy{% endblock %}
+
+{% block content %}
+<div class="page">
+
+  <h1>Your Cart</h1>
+  <p class="page-subtitle">{{ cart_items|length }} item{% if cart_items|length != 1 %}s{% endif %} in your cart</p>
+
+  {% if success %}
+    <div class="flash flash-success">✅ {{ success }}</div>
+  {% endif %}
+
+  {% if cart_items %}
+  <div class="cart-layout">
+
+    <!-- Cart Items -->
+    <div class="card" id="cart-items">
+      {% for item in cart_items %}
+      <div class="cart-item" id="cart-item-{{ item.id }}">
+        <div class="cart-item-img">{{ item.emoji }}</div>
+        <div class="cart-item-info">
+          <div class="cart-item-name" id="cart-item-name-{{ item.id }}">{{ item.name }}</div>
+          <div class="cart-item-price">${{ "%.2f"|format(item.price) }} × {{ item.quantity }}</div>
+        </div>
+        <div class="cart-item-total" id="cart-item-total-{{ item.id }}">${{ "%.2f"|format(item.price * item.quantity) }}</div>
+        <form method="post" action="/cart/remove" style="margin:0;">
+          <input type="hidden" name="product_id" value="{{ item.id }}">
+          <button id="remove-btn-{{ item.id }}" type="submit" class="btn btn-danger">Remove</button>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Order Summary -->
+    <div class="card" id="cart-summary">
+      <h2>Order Summary</h2>
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span id="cart-subtotal">${{ "%.2f"|format(subtotal) }}</span>
+      </div>
+      <div class="summary-row">
+        <span>Shipping</span>
+        <span id="cart-shipping">{% if subtotal >= 50 %}Free{% else %}$5.99{% endif %}</span>
+      </div>
+      <div class="summary-total">
+        <span>Total</span>
+        <span id="cart-total">${{ "%.2f"|format(total) }}</span>
+      </div>
+      <div style="margin-top:1.25rem;">
+        <a href="/checkout" id="checkout-btn" class="btn btn-primary">Proceed to Checkout</a>
+      </div>
+      <div style="margin-top:0.75rem;">
+        <a href="/" class="btn btn-secondary" style="width:100%;text-align:center;display:block;">Continue Shopping</a>
+      </div>
+    </div>
+
+  </div>
+  {% else %}
+  <div class="empty-cart" id="empty-cart">
+    <div class="empty-cart-icon">🛒</div>
+    <p>Your cart is empty. Start browsing products!</p>
+    <a href="/" class="btn btn-primary" style="width:auto;display:inline-flex;">Shop Now</a>
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

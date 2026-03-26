@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Checkout — ShopEasy{% endblock %}
+
+{% block content %}
+<div class="page">
+
+  <h1>Checkout</h1>
+  <p class="page-subtitle">Complete your order below.</p>
+
+  {% if error %}
+    <div class="flash flash-error">❌ {{ error }}</div>
+  {% endif %}
+
+  <div class="checkout-grid">
+
+    <!-- Checkout Form -->
+    <div class="card">
+      <h2>Shipping Details</h2>
+      <form method="post" action="/checkout">
+
+        <div class="form-group">
+          <label for="full-name">Full name</label>
+          <input id="full-name" name="full_name" type="text" placeholder="Jane Smith">
+        </div>
+
+        <div class="form-group">
+          <label for="address">Delivery address</label>
+          <input id="address" name="address" type="text" placeholder="123 Main Street, City">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone number</label>
+          <input id="phone" name="phone" type="tel" placeholder="+1 555 000 0000">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" placeholder="jane@example.com">
+        </div>
+
+        <h2 style="margin-top:1.5rem;">Payment Method</h2>
+        <div class="payment-options" id="payment-options">
+          <label class="payment-option">
+            <input type="radio" id="payment-card" name="payment_method" value="card" checked>
+            💳 Credit / Debit Card
+          </label>
+          <label class="payment-option">
+            <input type="radio" id="payment-paypal" name="payment_method" value="paypal">
+            🅿️ PayPal
+          </label>
+          <label class="payment-option">
+            <input type="radio" id="payment-cod" name="payment_method" value="cod">
+            💵 Cash on Delivery
+          </label>
+        </div>
+
+        <div style="margin-top:1.75rem;">
+          <button id="checkout-btn" type="submit" class="btn btn-primary">Place Order</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="card" id="order-summary">
+      <h2>Order Summary</h2>
+      {% for item in cart_items %}
+      <div class="order-summary-item" id="order-item-{{ item.id }}">
+        <span>{{ item.emoji }} {{ item.name }} ×{{ item.quantity }}</span>
+        <strong>${{ "%.2f"|format(item.price * item.quantity) }}</strong>
+      </div>
+      {% endfor %}
+      <hr style="border:none;border-top:1px solid var(--border);margin:1rem 0;">
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span>${{ "%.2f"|format(subtotal) }}</span>
+      </div>
+      <div class="summary-row">
+        <span>Shipping</span>
+        <span>{% if subtotal >= 50 %}Free{% else %}$5.99{% endif %}</span>
+      </div>
+      <div class="summary-total">
+        <span>Total</span>
+        <span id="order-total">${{ "%.2f"|format(total) }}</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

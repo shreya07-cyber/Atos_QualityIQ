@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} — ShopEasy{% endblock %}
+
+{% block content %}
+<div class="page">
+
+  <div style="margin-bottom:1.5rem;">
+    <a href="/" style="color:var(--text-muted);text-decoration:none;font-size:0.9rem;">← Back to products</a>
+  </div>
+
+  {% if error %}
+    <div class="flash flash-error">❌ {{ error }}</div>
+  {% endif %}
+
+  {% if success %}
+    <div class="flash flash-success">✅ {{ success }}</div>
+  {% endif %}
+
+  <div class="product-detail">
+    <div class="product-detail-img" id="product-image">{{ product.emoji }}</div>
+
+    <div class="product-detail-info">
+      <span class="badge badge-blue">{{ product.category }}</span>
+      <h1 id="product-name" style="margin-top:0.75rem;">{{ product.name }}</h1>
+      <div class="product-detail-price" id="product-price">${{ "%.2f"|format(product.price) }}</div>
+      <p class="product-detail-desc" id="product-description">{{ product.description }}</p>
+
+      <div class="qty-row">
+        <label style="margin:0;white-space:nowrap;">Quantity:</label>
+        <div class="qty-control">
+          <button type="button" id="qty-minus" onclick="changeQty(-1)">−</button>
+          <span id="qty-display">1</span>
+          <button type="button" id="qty-plus" onclick="changeQty(1)">+</button>
+        </div>
+      </div>
+
+      <form method="post" action="/cart/add">
+        <input type="hidden" name="product_id" value="{{ product.id }}">
+        <input type="hidden" name="quantity" id="qty-input" value="1">
+        <button id="add-cart-btn" type="submit" class="btn btn-primary" style="width:auto;padding:0.7rem 2rem;">
+          🛒 Add to Cart
+        </button>
+      </form>
+
+      <div style="margin-top:1.5rem;padding:1rem;background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--border);">
+        <div style="font-size:0.85rem;color:var(--text-muted);display:flex;flex-direction:column;gap:0.4rem;">
+          <div>✅ In stock & ready to ship</div>
+          <div>📦 Free delivery over $50</div>
+          <div>↩️ 30-day returns</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  let qty = 1;
+  function changeQty(delta) {
+    qty = Math.max(1, qty + delta);
+    document.getElementById('qty-display').textContent = qty;
+    document.getElementById('qty-input').value = qty;
+  }
+</script>
+{% endblock %}

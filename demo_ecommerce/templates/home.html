@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}ShopEasy — Home{% endblock %}
+
+{% block content %}
+<div class="page">
+
+  <!-- Hero + Search -->
+  <div class="hero">
+    <h1>Find What You Love</h1>
+    <p>Browse our curated collection of quality products.</p>
+    <form method="get" action="/search" class="hero-search">
+      <input id="search-box" name="q" type="text" placeholder="Search for laptops, phones, shoes…" value="{{ query or '' }}">
+      <button id="search-btn" type="submit">Search</button>
+    </form>
+  </div>
+
+  <!-- Product Grid -->
+  <div class="section-header">
+    <h2>Featured Products</h2>
+    <a href="/search" style="font-size:0.9rem;color:var(--accent);text-decoration:none;">View all →</a>
+  </div>
+
+  <div class="products-grid" id="products-grid">
+    {% for product in products %}
+    <a class="product-card" href="/product/{{ product.id }}" id="product-{{ product.id }}">
+      <div class="product-img">{{ product.emoji }}</div>
+      <div class="product-body">
+        <div class="product-name">{{ product.name }}</div>
+        <div class="product-category">{{ product.category }}</div>
+        <div class="product-price">${{ "%.2f"|format(product.price) }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}
