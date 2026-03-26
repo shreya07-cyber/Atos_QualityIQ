@@ -45,7 +45,7 @@ QualityIQ introduces an AI-driven system that:
 
 <br>
 
-![AI Decision Flow](https://raw.githubusercontent.com/shreya07-cyber/Atos_QualityIQ/main/images/AI_decision_making_process_flow.png)
+![AI Decision Flow](https://raw.githubusercontent.com/shreya07-cyber/Atos_QualityIQ/main/arch2.png)
 
 <br>
 
